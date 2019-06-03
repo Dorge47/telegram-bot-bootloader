@@ -9,13 +9,17 @@ Create a subfolder with a main.js file in it. This main.js is required to have t
 
 - `callback(data)`
     - This function will be used as a callback for the server. The data will be whatever data has been recieved from Telegram's servers
-- `init()`
-    - Will allow the server to initalize whatever it needs to initialize before being made public
+- `init(killFunc)`
+    - Will allow the server to initalize whatever it needs to initialize before being made public.
+    - `killFunc(token)`
+        - killFunc is a function passed to the bot which it can use to kill itself. This function takes that bot's token as an argument as an identifier for the bot
+- `onKill()`
+    - This function will run when the server has killed that bot
 
 ### Required Variables
 
 - `token`
-    - Will contain the bot's token. This token will be used as the url for the bot to respond to
+    - Will contain the bot's token. This token will be used as the url for the bot to respond to. This will be set by the bootloader before `init()`
 
 ### Required Configuration Files
 
@@ -23,8 +27,8 @@ Create a subfolder with a main.js file in it. This main.js is required to have t
     - This file will contain the tokens of each bot in the files. It will be in this structure:
     ```json
     [
-    { "bot_name": "Subfolder name", "token": "Telegram token" },
-    { "bot_name": "Subfolder name", "token": "Bot token" }
+    { "botName": "Subfolder name", "token": "Telegram token" },
+    { "botName": "Subfolder name", "token": "Bot token" }
     ]
     ```
 
