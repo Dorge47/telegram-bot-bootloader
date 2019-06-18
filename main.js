@@ -57,7 +57,7 @@ for (let i = 0; i < dirs.length; i++) {
 }
 
 const initDataObject = {
-    killFunc: killFunc,
+    killFunc: killBot,
     startFunc: startBot,
     initBotFunc: setBotWebhook,
 }
@@ -178,6 +178,7 @@ function startBot(botDirectory) {
     }
     //Set the bot's token
     bot.token = botToken;
+    bot.directory = botDirectory;
     //Init the bot
     bot.init(initDataObject);
     //Add the bot to the list
