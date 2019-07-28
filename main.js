@@ -14,6 +14,12 @@ const urlParser = require('url');
 // This will store all the bots which we will use
 var bots = [];
 
+const initDataObject = {
+    killFunc: killBot,
+    startFunc: startBot,
+    initBotFunc: setBotWebhook,
+}
+
 var server = null;
 
 //First we need to load our configuration files.
@@ -56,14 +62,15 @@ for (let i = 0; i < dirs.length; i++) {
     }
 }
 
-const initDataObject = {
-    killFunc: killBot,
-    startFunc: startBot,
-    initBotFunc: setBotWebhook,
+
+var serverOpts = {
+    key: fs.readFileSync(certs.key),
+    cert: fs.readFileSync(certs.cert),
+    ca: fs.readFileSync(certs.ca)
 }
 
 //And now we start the server
-server = https.createServer(certs, serverResponse).listen(443);
+server = https.createServer(serverOpts, serverResponse).listen(443);
 
 //We go through each bot and see if their URL has been created
 bots.forEach(function(bot) {
@@ -89,7 +96,7 @@ function setBotWebhook(token) {
         },
     }
     var req = https.request(options, (resp) => {}).on('error', (err) => console.error("Error sending request: " + err.message));
-    req.write(JSON.stringify({url: config.url + "/" + token}));
+    req.write(JSON.stringify({url: config.serverUrl + "/" + token}));
     req.end();
 }
 
@@ -97,6 +104,7 @@ function setBotWebhook(token) {
 function serverResponse(req, res) {
     //We parse the URL first
     let url = urlParser.parse(req.url);
+    console.log("Request from " + url.pathname);
     //First we find the bot
     let bot = bots.find(bot => ("/" + bot.token) == url.pathname);
     if (bot === undefined) {
@@ -143,9 +151,9 @@ function serverResponse(req, res) {
 function killBot(token) {
     let botIndex = bots.findIndex(bot => bot.token == token);
     // Move bot to a temporary variable so that we can destroy it
-    let bot = bots[i];
+    let bot = bots[botIndex];
     // Remove the bot at this index
-    bots.removeAt(botIndex);
+    bots.splice(botIndex, 1);
     // Let the bot know it's been killed
     bot.onKill();
     //And we check if there are still any bots even running anymore. If not, we just kill the server
@@ -164,8 +172,8 @@ function startBot(botDirectory) {
     }
     //Now we need to check if the bot is an actual bot
     let bot = null;
-    if (fs.existsSync(botDirectory + "/main.js")) {
-        bot = require(botDirectory + "/main.js");
+    if (fs.existsSync("./" + botDirectory + "/main.js")) {
+        bot = require("./" + botDirectory + "/main.js");
     } else {
         // Directory is not a bot or doesn't exist
         return 2;
@@ -183,6 +191,7 @@ function startBot(botDirectory) {
     bot.init(initDataObject);
     //Add the bot to the list
     bots.push(bot);
+    console.log("Started bot " + bot.name);
     return 0;
 }
 
