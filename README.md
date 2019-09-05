@@ -17,10 +17,10 @@ Create a subfolder with a main.js file in it. This main.js is required to have t
         - `startFunc`
             - Is a function used to start bots. This is not recommended for use by anything except for a management bot. This function takes the subdirectory of the bot to be started. Will return an error code if this fails.
             -Error codes:
-                0. Success
-                1. Bot already started
-                2. Directory given is not a bot or does not exist
-                3. Bot does not have a token entry
+                - 0: Success
+                - 1: Bot already started
+                - 2: Directory given is not a bot or does not exist
+                - 3: Bot does not have a token entry
         - `initBotFunc`
             - Is a function used in the process of starting a bot. This will check the bots URL and other information required to start the bot and set all that up. This takes the directory of the bot.
 - `onKill()`
