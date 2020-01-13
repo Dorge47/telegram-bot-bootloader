@@ -128,8 +128,9 @@ function serverResponse(req, res) {
     </body>
 </html>
 `);
-    //Yeet outta here
-    return;
+        console.log("It went fucky");
+        //Yeet outta here
+        return;
     }
     //If we do find the bot, we will get the data and push it to the bot
     let data = "";
