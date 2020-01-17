@@ -70,7 +70,7 @@ var serverOpts = {
 }
 
 //And now we start the server
-server = https.createServer(serverOpts, serverResponse).listen(443);
+server = https.createServer(serverOpts, serverResponse).listen(8443);
 
 //We go through each bot and see if their URL has been created
 bots.forEach(function(bot) {
@@ -128,7 +128,6 @@ function serverResponse(req, res) {
     </body>
 </html>
 `);
-        console.log("It went fucky");
         //Yeet outta here
         return;
     }
