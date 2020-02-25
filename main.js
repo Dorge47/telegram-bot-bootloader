@@ -139,7 +139,7 @@ function serverResponse(req, res) {
         console.log(bot.name + " data:");
         console.log(data);
         //Run the callback
-        bot.callback(data.message);
+        bot.callback(data);
         //Tell Telegram that we got their message well
         res.writeHead(200);
         res.end(data + "\n");
