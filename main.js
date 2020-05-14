@@ -103,7 +103,12 @@ function setBotWebhook(token) {
 //This is our callback for when the server recieves a request
 function serverResponse(req, res) {
     //We parse the URL first
-    let url = urlParser.parse(req.url);
+    let reqDate = new Date();
+    let dateString = "";
+    dateString += reqDate.getFullYear() + ":" + (reqDate.getMonth() + 1) + ":"
+    + reqDate.getDay() + ":" + reqDate.getHours() + ":" + reqDate.getMinutes()
+    + ":" reqDate.getSeconds();
+    console.log(dateString + ": Request from " + url.pathname);
     console.log("Request from " + url.pathname);
     //First we find the bot
     let bot = bots.find(bot => ("/" + bot.token) == url.pathname);
