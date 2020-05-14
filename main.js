@@ -107,7 +107,7 @@ function serverResponse(req, res) {
     let dateString = "";
     dateString += reqDate.getFullYear() + ":" + (reqDate.getMonth() + 1) + ":"
     + reqDate.getDay() + ":" + reqDate.getHours() + ":" + reqDate.getMinutes()
-    + ":" reqDate.getSeconds();
+    + ":" + reqDate.getSeconds();
     console.log(dateString + ": Request from " + url.pathname);
     console.log("Request from " + url.pathname);
     //First we find the bot
