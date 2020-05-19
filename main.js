@@ -103,6 +103,7 @@ function setBotWebhook(token) {
 //This is our callback for when the server recieves a request
 function serverResponse(req, res) {
     //We parse the URL first
+    let url = urlParser.parse(req.url);
     let reqDate = new Date();
     let dateString = "";
     dateString += reqDate.getFullYear() + ":" + (reqDate.getMonth() + 1) + ":"
