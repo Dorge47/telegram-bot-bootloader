@@ -114,13 +114,14 @@ function serverResponse(req, res) {
     {
         if (url.pathname.slice(1) == tokens[i].token) {
             tokenSafety = false;
+            var botName = tokens[i].botName;
         }
     }
     if (tokenSafety) {
         console.log(dateString + ": Request from " + url.pathname);
     }
     else {
-        console.log(dateString + ": Request from bot token");
+        console.log(dateString + ": Request from " + botName);
     }
     //First we find the bot
     let bot = bots.find(bot => ("/" + bot.token) == url.pathname);
