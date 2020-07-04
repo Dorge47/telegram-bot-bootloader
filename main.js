@@ -106,15 +106,21 @@ function serverResponse(req, res) {
     let url = urlParser.parse(req.url);
     let reqDate = new Date();
     let dateString = "";
+    let tokenSafety = true;
     dateString += reqDate.getFullYear() + ":" + (reqDate.getMonth() + 1) + ":"
     + reqDate.getDay() + ":" + reqDate.getHours() + ":" + reqDate.getMinutes()
     + ":" + reqDate.getSeconds();
-    console.log(dateString + ": Request from " + url.pathname);
-    if (url.pathname.includes(token)) {
-        console.log(dateString + ": Request from bot token");
+    for (let i = 0; i < tokens.length(); i++)
+    {
+        if (url.pathname.slice(1) == tokens[i].token) {
+            tokenSafety = false;
+        }
+    }
+    if (tokenSafety) {
+        console.log(dateString + ": Request from " + url.pathname);
     }
     else {
-        console.log(dateString + ": Request from " + url.pathname);
+        console.log(dateString + ": Request from bot token");
     }
     //First we find the bot
     let bot = bots.find(bot => ("/" + bot.token) == url.pathname);
