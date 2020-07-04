@@ -110,7 +110,7 @@ function serverResponse(req, res) {
     dateString += reqDate.getFullYear() + ":" + (reqDate.getMonth() + 1) + ":"
     + reqDate.getDay() + ":" + reqDate.getHours() + ":" + reqDate.getMinutes()
     + ":" + reqDate.getSeconds();
-    for (let i = 0; i < tokens.length(); i++)
+    for (let i = 0; i < tokens.length; i++)
     {
         if (url.pathname.slice(1) == tokens[i].token) {
             tokenSafety = false;
