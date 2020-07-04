@@ -110,7 +110,12 @@ function serverResponse(req, res) {
     + reqDate.getDay() + ":" + reqDate.getHours() + ":" + reqDate.getMinutes()
     + ":" + reqDate.getSeconds();
     console.log(dateString + ": Request from " + url.pathname);
-    console.log("Request from " + url.pathname);
+    if (url.pathname.includes(token)) {
+        console.log(dateString + ": Request from bot token");
+    }
+    else {
+        console.log(dateString + ": Request from " + url.pathname);
+    }
     //First we find the bot
     let bot = bots.find(bot => ("/" + bot.token) == url.pathname);
     if (bot === undefined) {
