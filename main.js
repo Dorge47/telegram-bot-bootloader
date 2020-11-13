@@ -126,26 +126,9 @@ function serverResponse(req, res) {
     //First we find the bot
     let bot = bots.find(bot => ("/" + bot.token) == url.pathname);
     if (bot === undefined) {
-        //This bot doesn't exist, so we'll just say that we aren't supposed to
-        //be here for now. Later on we can add something for a web interface
-        //here.
-        res.writeHead(403);
-        res.end(
-`
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Get out plz</title>
-    </head>
-    <body>
-        <h1>This isn't for you!</h1>
-        <p>Why are you here? Get out.</p>
-    </body>
-</html>
-`);
+        //This bot doesn't exist, so we'll just JUKE
+        res.writeHead(418);
+        res.end();
         //Yeet outta here
         return;
     }
