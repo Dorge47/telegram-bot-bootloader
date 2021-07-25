@@ -108,7 +108,7 @@ function serverResponse(req, res) {
     let dateString = "";
     let tokenSafety = true;
     dateString += reqDate.getFullYear() + ":" + (reqDate.getMonth() + 1) + ":"
-    + reqDate.getDay() + ":" + reqDate.getHours() + ":" + reqDate.getMinutes()
+    + reqDate.getDate() + ":" + reqDate.getHours() + ":" + reqDate.getMinutes()
     + ":" + reqDate.getSeconds();
     for (let i = 0; i < tokens.length; i++)
     {
