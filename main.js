@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // The Telegram Bot Bootloader
 // Licensed under the GPL v3 license
 // Written by: NateDogg1232 and Dorge47
